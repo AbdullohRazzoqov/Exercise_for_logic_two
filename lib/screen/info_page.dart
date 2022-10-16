@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:about_companies/data/data.dart';
 import 'package:flutter/material.dart';
 
@@ -22,7 +24,6 @@ class InfoPage extends StatelessWidget {
             ),
           ),
           expandedHeight: MediaQuery.of(context).size.height * 0.3,
-          pinned: true,
         ),
         SliverList(
           delegate: SliverChildListDelegate(
@@ -49,23 +50,28 @@ class InfoPage extends StatelessWidget {
               child: InkWell(
                 onTap: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => InfoPage(
-                                brand: brends[index],
-                              )));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => InfoPage(
+                        brand: brends[index],
+                      ),
+                    ),
+                  );
+                  
                 },
-                child: ListTile(contentPadding:const  EdgeInsets.symmetric(horizontal: 10),
-                    title: Text(brends[index]['name'].toString()),
+                child: ListTile(
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                    title: Text(brends[(index = Random().nextInt(10))]['name'].toString()),
                     subtitle: Container(
                       width: MediaQuery.of(context).size.width * 0.05,
                       height: MediaQuery.of(context).size.height * 0.12,
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(12),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
                         image: DecorationImage(
-                          image: NetworkImage(
-                            brends[index]['imageCart'].toString(),
-                          ),fit: BoxFit.cover
-                        ),
+                            image: NetworkImage(
+                              brends[index]['imageCart'].toString(),
+                            ),
+                            fit: BoxFit.cover),
                       ),
                     )),
               ),
